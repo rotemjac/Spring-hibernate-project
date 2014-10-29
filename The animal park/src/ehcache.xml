@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" >
+
+    <diskStore path="java.io.tmpdir" />
+
+    <defaultCache
+        diskExpiryThreadIntervalSeconds="1"
+        diskPersistent="false"
+        eternal="false"
+        maxElementsInMemory="100"
+        maxElementsOnDisk="100000"
+        memoryStoreEvictionPolicy="LRU"
+        overflowToDisk="false"
+        timeToLiveSeconds="6000" />
+
+    <cache
+        name="workers_cache"
+        diskExpiryThreadIntervalSeconds="1"
+        diskPersistent="false"
+        eternal="false"
+        maxElementsInMemory="100"
+        maxElementsOnDisk="100000"
+        memoryStoreEvictionPolicy="LRU"
+        overflowToDisk="false"
+        statistics="true"
+        timeToLiveSeconds="6000" />
+
+    <cache
+        name="all_animals_cache"
+        diskExpiryThreadIntervalSeconds="1"
+        diskPersistent="false"
+        eternal="false"
+        maxElementsInMemory="100"
+        maxElementsOnDisk="100000"
+        memoryStoreEvictionPolicy="LRU"
+        overflowToDisk="false"
+        statistics="true"
+        timeToLiveSeconds="6000" />
+
+    <cache
+        name="animals_in_area_cache"
+        diskExpiryThreadIntervalSeconds="1"
+        diskPersistent="false"
+        eternal="false"
+        maxElementsInMemory="100"
+        maxElementsOnDisk="100000"
+        memoryStoreEvictionPolicy="LRU"
+        overflowToDisk="false"
+        statistics="true"
+        timeToLiveSeconds="6000" />
+
+    <cache
+        name="animals_need_check_cache"
+        diskExpiryThreadIntervalSeconds="1"
+        diskPersistent="false"
+        eternal="false"
+        maxElementsInMemory="100"
+        maxElementsOnDisk="100000"
+        memoryStoreEvictionPolicy="LRU"
+        overflowToDisk="false"
+        statistics="true"
+        timeToLiveSeconds="6000" />
+
+</ehcache>

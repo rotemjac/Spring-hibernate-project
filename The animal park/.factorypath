@@ -1,0 +1,5 @@
+<factorypath>
+    <factorypathentry kind="EXTJAR" id="C:\Program Files\Java\eclipselink-2.0.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="C:\Program Files\Java\eclipselink-jpa-modelgen-2.2.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="C:\Program Files\Java\javax.persistence_2.0_preview.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>

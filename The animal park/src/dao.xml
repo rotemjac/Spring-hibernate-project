@@ -1,0 +1,77 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd" >
+
+    <!-- Templates -->
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+        <property name="dataSource" ref="dataSource_id" />
+    </bean>
+
+    <!-- Hibernate session factory -->
+
+    <bean
+        id="sessionFactory"
+        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
+
+        <property name="dataSource" ref="dataSource_id" />
+
+        <property name="packagesToScan" value="my.pack.dataAccessTier" />
+        
+<!--         I Think we defined it in the persistence.xml and it's enough-->			
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext></prop>	
+			</props>
+        </property>
+       
+    </bean>
+
+    <!-- Jpa entity Manager Factory -->
+    <!--
+     	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="myDatabaseConfig" />
+		<property name="dataSource" ref="dataSource_id" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+			</bean>
+		</property>
+	</bean>
+    -->
+
+
+    <!-- Hibarnate transactions manager -->
+
+    <bean
+        id="transactionManager"
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager" >
+
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!--
+     Jpa transactions manager 
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	I Do Not define the transaction manager via jpa because i can't set my isolation
+	level to something else then DEFAULT, i'm getting the next error:
+		org.springframework.transaction.InvalidIsolationLevelException: 
+		Standard JPA does not support custom isolation levels - 
+		use a special JpaDialect for your JPA implementation 
+		look at:
+		https://jira.springsource.org/browse/SPR-5012	
+    -->
+
+</beans>

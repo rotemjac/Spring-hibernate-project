@@ -1,0 +1,82 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+ 	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring" 
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/jee 
+        http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx       
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/cache 
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
+    
+
+	
+	
+	<!-- Defining Auto scanning fo components -->
+
+	<context:component-scan base-package="my.pack">
+	</context:component-scan>
+
+	<!-- Activates annotation-based bean configuration -->
+	<context:annotation-config />
+
+	<!-- Defining Auto scanning for @Transactional components -->
+	<tx:annotation-driven />
+
+	<!-- Defining Auto scanning for @Aspect components -->
+	<aop:aspectj-autoproxy />
+
+	<!-- If you want hibernate or jpa just write it in 'value' line -->
+	<bean id="properties_id"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/myConfig.hibernate.properties" />
+	</bean>
+
+	<alias name="${DataAccess.AnimalDao}" alias="AnimalDao" />
+	<alias name="${DataAccess.AreaDao}" alias="AreaDao" />
+	<alias name="${DataAccess.FacilitiesDao}" alias="FacilitiesDao" />
+	<alias name="${DataAccess.Land_PortionDao}" alias="Land_Portion" />
+	<alias name="${DataAccess.CEODao}" alias="CEODao" />
+	<alias name="${DataAccess.ManagerDao}" alias="ManagerDao" />
+	<alias name="${DataAccess.ExtraFeaturesManagersDao}" alias="ExtraFeaturesManagersDao" />
+	<alias name="${DataAccess.WorkerDao}" alias="WorkerDao" />
+
+	
+	<!-- <alias name="${DataAccess.Dao_performance_data}" alias="Dao_performance_data" /> -->
+	
+	<import resource="dao.xml" />
+	<import resource="services.xml" />
+	<import resource="datasource-production.xml" />
+
+	<!-- Cache definitions -->
+
+	<cache:annotation-driven />
+		
+	<bean id="cacheManager"
+    	class="org.springframework.cache.ehcache.EhCacheCacheManager"
+   		 p:cacheManager-ref="ehcache">
+   </bean> 
+
+    
+	<bean id="ehcache"    
+	class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+    p:configLocation="classpath:/ehcache.xml"
+    p:shared="true"/>
+			
+
+	
+
+</beans>
+
