@@ -1,5 +1,7 @@
 Spring-hibernate-project
 ========================
+Demo of the app: 
+https://www.youtube.com/watch?v=NaRA0qpf-GA
 
 A backend for enterprise application using spring, hibernate and JPA which i made back in 2012.
 
